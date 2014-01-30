@@ -1,4 +1,4 @@
 blog
 ====
 
-creating blog application in Japanese
+creating blog application in Japanese!
