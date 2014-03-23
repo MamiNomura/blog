@@ -8,6 +8,6 @@ angular.module("config", [])
 	}
 })
 
-.constant("ENV", "development")
+.constant("ENV", "dev")
 
 ;
