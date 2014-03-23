@@ -2,7 +2,7 @@
 'use strict';
 var matchApp;
 
-matchApp = angular.module('matchApp', ['ngCookies', 'ngResource', 'ngSanitize', 'ngRoute']);
+matchApp = angular.module('matchApp', ['ngCookies', 'ngResource', 'ngSanitize', 'ngRoute', 'config']);
 
 matchApp.config([
   '$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {

@@ -25,6 +25,36 @@ module.exports = function (grunt) {
       dist: 'dist'
     },
 
+
+    ngconstant: {
+      options: {
+        space: '  ',
+        name: 'config',
+      
+        constants: {
+          debug: true        
+        }
+      },
+      // targets
+      dev: {
+        options: {
+          dest: '<%= yeoman.app %>/scripts/config.js'          
+        },    
+        constants: {
+          ENV: 'development'
+        }
+      },
+      prod: {
+        options: {
+          dest: '<%= yeoman.dist %>/scripts/config.js'
+        },
+        constants: {
+          ENV: 'production',
+          debug: false
+        }
+      }
+    },  
+
     // Watches files for changes and runs tasks based on the changed files
     watch: {
       js: {
@@ -353,13 +383,19 @@ module.exports = function (grunt) {
   });
 
 
+  //grunt.loadNpmTasks('grunt-ng-constant');
+  
   grunt.registerTask('serve', function (target) {
     if (target === 'dist') {
-      return grunt.task.run(['build', 'connect:dist:keepalive']);
+      return grunt.task.run([
+        'build',
+        'connect:dist:keepalive'
+        ]);
     }
 
     grunt.task.run([
       'clean:server',
+      'ngconstant:dev',
       'bower-install',
       'concurrent:server',
       'autoprefixer',
@@ -375,6 +411,7 @@ module.exports = function (grunt) {
 
   grunt.registerTask('test', [
     'clean:server',
+    'ngconstant:dev',
     'concurrent:test',
     'autoprefixer',
     'connect:test',
@@ -383,6 +420,7 @@ module.exports = function (grunt) {
 
   grunt.registerTask('build', [
     'clean:dist',
+    'ngconstant:prod',
     'bower-install',
     'useminPrepare',
     'concurrent:dist',

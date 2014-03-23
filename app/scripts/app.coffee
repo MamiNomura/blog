@@ -4,7 +4,8 @@ matchApp = angular.module('matchApp', [
   'ngCookies',
   'ngResource',
   'ngSanitize',
-  'ngRoute'
+  'ngRoute',
+  'config'
 ])
 
 
