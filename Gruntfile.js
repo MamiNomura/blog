@@ -28,11 +28,11 @@ module.exports = function (grunt) {
 
     ngconstant: {
       options: {
-        space: '  ',
         name: 'config',
       
         constants: {
-          debug: true        
+          debug: true,
+          config: grunt.file.readJSON('application.conf')        
         }
       },
       // targets
@@ -41,7 +41,7 @@ module.exports = function (grunt) {
           dest: '<%= yeoman.app %>/scripts/config.js'          
         },    
         constants: {
-          ENV: 'development'
+          ENV: 'development',
         }
       },
       prod: {
@@ -63,6 +63,10 @@ module.exports = function (grunt) {
         options: {
           livereload: true
         }
+      },
+      coffee: {
+        files: ['<%=yeoman.app %>/**/*.coffee', 'test/**/*.coffee'],
+        tasks: ['coffee']
       },
       jsTest: {
         files: ['test/spec/{,*/}*.js'],
@@ -293,6 +297,17 @@ module.exports = function (grunt) {
       }
     },
 
+    coffee: {
+      compile: {
+        files: [{
+          expand: true,
+          cwd: 'src',
+          src: ['**/*.coffee'],
+          dest: '.tmp',
+          ext: '.js'
+        }]
+      }
+    },
     // Replace Google CDN references
     cdnify: {
       dist: {
@@ -384,6 +399,7 @@ module.exports = function (grunt) {
 
 
   //grunt.loadNpmTasks('grunt-ng-constant');
+  grunt.loadNpmTasks('grunt-contrib-coffee');
   
   grunt.registerTask('serve', function (target) {
     if (target === 'dist') {
